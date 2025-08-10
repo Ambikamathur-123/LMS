@@ -3,9 +3,8 @@ import React from 'react'
 const Player = () => {
   return (
     <div>
-      <h1>
-        Player 
-      </h1>
+      {/* left column*/}
+      <div></div>
     </div>
   )
 }

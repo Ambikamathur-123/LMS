@@ -1,8 +1,16 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import { useNavigate } from "react-router-dom";
+import {Line} from 'rc-progress'
+import Footer from '../../components/students/Footer';
 
 const MyEnrollements = () => {
   const { enrolledCourses, calculateCourseDuration } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const handleOngoingClick = (courseId) => {
+    navigate(`/player/${courseId}`);
+  };
 
   return (
     <div className="md:px-36 px-8 pt-10">
@@ -31,6 +39,8 @@ const MyEnrollements = () => {
                   />
                   <div>
                     <p className="font-medium">{course.courseTitle}</p>
+                    <Line
+                     strokeWidth={2} percent={50}className="bg-gray-300 rounded-full" />
                   </div>
                 </td>
 
@@ -47,7 +57,10 @@ const MyEnrollements = () => {
 
                 {/* Status */}
                 <td className="px-4 py-3">
-                  <button className="text-green-600 font-medium">
+                  <button
+                    onClick={() => handleOngoingClick(course._id)}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-1 rounded transition"
+                  >
                     {course.status || "Ongoing"}
                   </button>
                 </td>
@@ -62,7 +75,9 @@ const MyEnrollements = () => {
           )}
         </tbody>
       </table>
+      <Footer/>
     </div>
+    
   );
 };
 
